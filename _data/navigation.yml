@@ -2,8 +2,8 @@
 main:
   - title: "Introduce"
     url: /about/
-  - title: "Category"
-    url: /categories/"
+  - title: "Research"
+    url: categories/category-research/
   - title: "Tags"
     url: /tags/
   # - title: "About"
