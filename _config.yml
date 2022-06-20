@@ -16,9 +16,9 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : "Potato's dev logs"
+title                    : "Potato's Blog"
 title_separator          : "-"
-subtitle                 : "vesion 1.0"
+#subtitle                 : "vesion 1.0"
 name                     : "Han-lim"
 description              : "An amazing website."
 url                      : "https://han-lim.github.io"

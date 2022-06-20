@@ -11,10 +11,22 @@
                 
                 {% for category in site.categories %}
                     {% if category[0] == "3D Object Detection" %}
-                        <li><a href="/categories/3D-object" class="">C ++ ({{category[1].size}})</a></li>
+                        <li><a href="/categories/3D-OD" class="">Paper Review ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
+      </li>
+      <li>  
+        <span class="nav__sub-title">Algorithm
+            <ul>
+                
+                {% for category in site.categories %}
+                    {% if category[0] == "Baekjoon" %}
+                        <li><a href="/categories/Baekjoon" class="">Baekjoon ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            
       </li>
   </ul>
 </nav>
