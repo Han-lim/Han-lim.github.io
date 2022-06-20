@@ -5,37 +5,35 @@
   <input id="ac-toc" name="accordion-toc" type="checkbox" />
   <label for="ac-toc">{{ site.data.ui-text[site.locale].menu_label }}</label>
   <ul class="nav__items" id="category_tag_menu">
+      <!--전체 글 수-->
+      <li>
+            <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">{{sum}}</style> <span style="font-family:'Cafe24Oneprettynight';">개</style> 
+      </li>
       <li>
         <span class="nav__sub-title">Research</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "3D-OD" %}
-                        <li><a href="/categories/3D-OD" class="">3D Object Detection ({{category[1].size}})</a></li>
+                    {% if category[0] == "3dod" %}
+                        <li><a href="/categories/3dod" class="">3D Object Detection ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-      </li>
-      <li>  
         <span class="nav__sub-title">Algorithm</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Baekjoon" %}
-                        <li><a href="/categories/Baekjoon" class="">Baekjoon ({{category[1].size}})</a></li>
+                    {% if category[0] == "baekjoon" %}
+                        <li><a href="/categories/baekjoon" class="">Baekjoon ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-            
-      </li>
-      <li>  
         <span class="nav__sub-title">No 삽질</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Debug" %}
-                        <li><a href="/categories/Debug" class="">Debug ({{category[1].size}})</a></li>
+                    {% if category[0] == "debug" %}
+                        <li><a href="/categories/debug" class="">Debug ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-            
       </li>
   </ul>
 </nav>

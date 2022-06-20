@@ -1,10 +1,10 @@
 ---
-title: "3D Object Detection"
+title: "NO 삽질"
 layout: archive
-permalink: categories/3D-OD
+permalink: categories/debug
 author_profile: true
 sidebar_main: true
 ---
 
-{% assign posts = site.categories.3D-OD %}
+{% assign posts = site.categories.Debug %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
