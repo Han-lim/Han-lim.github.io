@@ -1,7 +1,7 @@
 ---
 title: "3D Object Detection"
 layout: archive
-permalink: categories/3dod
+permalink: categories/3d_object_detection
 author_profile: true
 sidebar_main: true
 ---

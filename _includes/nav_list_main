@@ -13,8 +13,8 @@
         <span class="nav__sub-title">Research</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "3dod" %}
-                        <li><a href="/categories/3dod" class="">3D Object Detection ({{category[1].size}})</a></li>
+                    {% if category[0] == "3d_object_detection" %}
+                        <li><a href="/categories/3d_object_detection" class="">3D Object Detection ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
