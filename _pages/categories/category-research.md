@@ -1,10 +1,10 @@
 ---
 title: "Research"
+layout: archive
 permalink: categories/category-research
-last_modified_at: 2022-05-27T11:59:26-04:00
-toc: true
-toc_sticky: true
-toc_label: "MYSELF"
+author_profile: true
+sidebar_main: true
 ---
 
-![icon](/assets/images/icons/apple-touch-icon-120x120.png)
+{% assign posts = site.categories.Research %}
+{% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
