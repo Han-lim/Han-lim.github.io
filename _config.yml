@@ -27,6 +27,7 @@ repository               : "https://github.io/Han-lim/Han-lim.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
+future                   : true
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
@@ -253,9 +254,6 @@ whitelist:
 category_archive:
   type: liquid
   path: /categories/
-research_archive:
-  type: liquid
-  path: /research/
 tag_archive:
   type: liquid
   path: /tags/
@@ -294,6 +292,7 @@ defaults:
       share: true
       related: true
       sidebar_main: true
+
       
 # _pages                
   - scope:

@@ -1,0 +1,42 @@
+---
+published: true
+title:  "[Debugging] ModuleNotFoundError: No module named 'dlib'"
+excerpt: "Ubuntu 20.04 환경에서 dlib 설치 시 생기는 error를 해결해보자. "
+
+categories:
+  - Baekjoon
+tags:
+  - [Error, Debug, dlib, cmake]
+
+toc: true
+toc_sticky: true
+ 
+date: 2022-06-20
+last_modified_at: 2020-06-20
+---
+
+환경: Ubuntu 20.04 + python3.8 + tf
+
+ 
+
+이 에러를 보고 pip install dlib을 하면
+
+ 
+
+ERROR: CMake must be installed to build dlib 라는 문구가 뜨면서 설치가 안됨.
+
+ 
+
+그래서 cmake를 먼저 설치하기 위해
+
+sudo apt install cmake 을 입력한 결과 cuda-driver 관련 의존성 문제가 있다는 메세지가 나옴.
+
+ 
+
+근데
+
+pip3 install cmake
+
+pip3 install dlib
+
+으로 간단히 해결!
