@@ -6,3 +6,7 @@
 /* Colors */
 $text-color: #000 !default;
 $link-color: #000 !default;
+
+.page__title{
+   color: $link-color;
+ }
