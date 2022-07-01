@@ -15,8 +15,8 @@
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "ko-KR"
-title                    : "Potato's Blog"
+locale                   : "en-EN"
+title                    : "One Forest :deciduous_tree:"
 title_separator          : "-"
 #subtitle                 : "vesion 1.0"
 name                     : "Han-lim"
