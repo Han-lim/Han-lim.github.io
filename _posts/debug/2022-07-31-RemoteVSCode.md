@@ -1,7 +1,7 @@
 ---
 published: true
 title:  "[Linux] 로컬 윈도우 VSCode에서 비밀번호 입력 없이 Linux 서버 원격 연결 설정"
-excerpt: "로컬 VSCode에서 Remote로 리눅스 환경에 접근할 때 항상 비밀번호 입력하는 과정 없애기"
+excerpt: "  로컬 VSCode에서 Remote로 리눅스 환경에 접근할 때 항상 비밀번호 입력하는 과정 없애기"
 
 categories:
   - debug
