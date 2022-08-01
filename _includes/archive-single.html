@@ -16,6 +16,7 @@
       <div class="archive__item-teaser">
         <img src="{{ teaser | relative_url }}" alt="">
       </div>
+      
     {% endif %}
     <h2 class="archive__item-title" itemprop="headline">
       {% if post.date %}
@@ -36,6 +37,7 @@
 
     {% if site.category_archive.type and post.categories[0] and site.tag_archive.type and post.tags[0] %}
       {%- include post__taxonomy.html -%}
+      
     {% endif %}
 
     
