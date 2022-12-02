@@ -177,12 +177,12 @@
   -ms-flex-align: center;
   align-items: center;
   min-height: $nav-height;
-  background: $background-color;
+  /*background: $background-color;*/
 
   a {
     display: block;
     margin: 0 1rem;
-    color: $masthead-link-color;
+    color: $masthead-link-color; 
     text-decoration: none;
     -webkit-transition: none;
     transition: none;
@@ -513,7 +513,6 @@
   box-shadow: $box-shadow;
 
   .nav__title {
-    color: #fff;
     font-size: $type-size-6;
     background: $primary-color;
     border-top-left-radius: $border-radius;
