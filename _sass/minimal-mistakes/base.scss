@@ -6,8 +6,6 @@ html {
   /* sticky footer fix */
   position: relative;
   min-height: 100%;
-  background: linear-gradient(to bottom, #7baffdaf, #FFFFFF);
-  height: auto !important;
 }
 
 body {
@@ -18,13 +16,13 @@ body {
   line-height: 1.5;
   background: transparent;
 
-  animation: snow 20s linear infinite;
+  //animation: snow 20s linear infinite;
 
 /*백그라운드 이미지 원근감느낌 이미지*/
 
-background-image:url('https://cdn.discordapp.com/attachments/460145928850898945/515694458633846831/snow.png'), 
-url("https://cdn.discordapp.com/attachments/460145928850898945/515694460668084274/snow3.png"), 
-url("https://cdn.discordapp.com/attachments/460145928850898945/515694462278828073/snow2.png");
+// background-image:url('https://cdn.discordapp.com/attachments/460145928850898945/515694458633846831/snow.png'), 
+// url("https://cdn.discordapp.com/attachments/460145928850898945/515694460668084274/snow3.png"), 
+// url("https://cdn.discordapp.com/attachments/460145928850898945/515694462278828073/snow2.png");
 
 
 
@@ -35,12 +33,12 @@ url("https://cdn.discordapp.com/attachments/460145928850898945/51569446227882807
 }
 
 /*뒷배경 움직이는 애니메이션*/
-@keyframes snow {
+// @keyframes snow {
 
-  0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
+//   0% {background-position: 0px 0px, 0px 0px, 0px 0px;}
   
-  100% {background-position: 500px 1000px, 400px 400px, 300px 300px;}
-}
+//   100% {background-position: 500px 1000px, 400px 400px, 300px 300px;}
+// }
 
 
 h1,
