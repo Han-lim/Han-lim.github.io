@@ -40,6 +40,14 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+        <span class="nav__sub-title">Python</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "pytorch" %}
+                        <li><a href="/categories/pytorch" class="">Pytorch ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
         <span class="nav__sub-title">No 삽질</span>
             <ul>
                 {% for category in site.categories %}
