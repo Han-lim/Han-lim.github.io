@@ -37,6 +37,7 @@ VSCode에서 원격으로 서버에 접속 시 매번 비밀번호를 입력하�
 
     `scp -P [포트번호] .ssh_id/id_rsa.pub [username]@[ip주소]:.ssh/`
     <br>
+    나는 여기서 scp로 파일을 옮겼지만, 직접 옮겨도 됨.
 
     ---
 
@@ -44,6 +45,7 @@ VSCode에서 원격으로 서버에 접속 시 매번 비밀번호를 입력하�
 
     `cat id_rsa.pub >> .ssh/authorized_keys`
     <br>
+    cat으로 해도 되고, 아니면 authorized_key 파일을 열어서 아래에 붙여넣어도 됨.
 
     ---
 
