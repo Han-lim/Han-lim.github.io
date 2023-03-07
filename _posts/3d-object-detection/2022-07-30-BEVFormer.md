@@ -49,3 +49,9 @@ BEVFormer의 대략적인 파이프라인은,
 3. BEV queries로 multi-camera feature Ft로부터 spatial information을 Spatial Cross-Attention으로 찾음. <br>
 4. 이 과정으로 refined BEV features를 만들고, 다음 encoder layer의 input으로 사용함. (encoder layer 수 : 6) <br>
 5. 모든 encoder layer를 통화하면, BEV feature Bt가 만들어 지고, 3D detection과 map segmentation heat로 3D Bbox와 semantic map을 predict. <br>
+
+
+#### 3.2 BEV Queries
+
+BEVFormer에서 사용하는 query는 grid 형태이며 learnable parameters로 이루어진다. <br>
+이 query를 BEV query라고 부르며, $ Q \in \mathbb{R}^{H*W*C} $ 로 정의된다. <br>
