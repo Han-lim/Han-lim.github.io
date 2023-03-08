@@ -54,4 +54,6 @@ BEVFormer의 대략적인 파이프라인은,
 #### 3.2 BEV Queries
 
 BEVFormer에서 사용하는 query는 grid 형태이며 learnable parameters로 이루어진다. <br>
-이 query를 BEV query라고 부르며, $Q \in \mathbb{R}^{H*W*C}$ 로 정의된다. <br>
+
+이 query를 BEV query라고 부르며, $ Q \in \mathbb{R} ^{H \times W \times C} $ 로 정의된다. <br>
+
