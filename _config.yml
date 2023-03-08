@@ -299,6 +299,7 @@ defaults:
       share: true
       related: true
       sidebar_main: true
+      use_math: true
 
       
 # _pages                
