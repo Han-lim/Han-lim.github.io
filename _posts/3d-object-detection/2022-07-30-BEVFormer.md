@@ -3,6 +3,11 @@ published: True
 title:  "[Paper Review] BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers"
 excerpt: "Li, Z., Wang, W., Li, H., Xie, E., Sima, C., Lu, T., ... & Dai, J. (2022). BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers. arXiv preprint arXiv:2203.17270."
 
+header:
+  overlay_image: ../../assets/images/posts/3DOD/2022-07-30-BEVFormer/3DOD_bevformer_fig1.JPG
+  overlay_filter: 0.5
+
+
 categories:
   - 3d_object_detection
 tags:
