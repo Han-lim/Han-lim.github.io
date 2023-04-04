@@ -26,7 +26,7 @@ apt-get update를 치니까 갑자기 "Target Packages is configured multiple ti
 <br>
 <br>
 
-1. **이 에러들은 package manager가 update 하면서 중복된 source 가 있어서 뜨는 것이어서, 일단 중복된 source 정보를 찾아야 한다.** 
+**1. 이 에러들은 package manager가 update 하면서 중복된 source 가 있어서 뜨는 것이어서, 일단 중복된 source 정보를 찾아야 한다.** 
     <br> 
 
     예시로 아래와 같이 에러 문구가 떴다면, <br>
@@ -38,7 +38,7 @@ apt-get update를 치니까 갑자기 "Target Packages is configured multiple ti
 
     ---
 
-2. **FILE_1 이나 FILE_2 중 한 곳에서 해당 line 내용을 삭제한다.**
+**2. FILE_1 이나 FILE_2 중 한 곳에서 해당 line 내용을 삭제한다.**
   <br>
     - FILE_1:LINE_1을 지우든가 (/etc/apt/sources.list 의 Line # 50), <br>
     - FILE_2:LINE_2을 지우면 됨. (/etc/apt/sources.list.d/docker.list 의 Line # 1), <br>
