@@ -111,3 +111,13 @@ BEV place 상의 각 query들을 pillar-like query로 옮긴다.
   </center>  
 
 $ i $ 는 camera view의 index, $ j $ 는 reference points의 index, $ N_{ref} $ 는 각 BEV query에서의 total reference points 를 나타낸다.  
+$ F_{t}^{i} $ 는 i 번째 camera view의 features 를 나타낸다.  
+각 BEV Query $ Q_{p} $ 에 대해, i 번째 view 에 대한 j 번째 reference point 를 얻기 위해  project function $ P(p, i, j) $ 를 정의한다.  
+<br>
+이 project function 이 어떻게 동작하는 지 살펴보자.  
+우선 grid-shaped query $ Q $ 상에서 $ p=(x, y) $ 위치한 query 한 칸(?)을 $ Q_{p} $ 라고 하면, 이 $ Q_{p} $ 위치에 해당하는 real world location 을 계산한다.  
+
+$$ x' = (x - \frac{W}{2}) * s; \quad y' = (y - \frac{H}{2}) * s $$
+
+이때, $H, W$ 는 BEV queries의 spatial shape 에 대한 값이고, $s$ 는 BEV's grid의 resolution size 가 된다.  
+또한, $ (x', y') $ 은 ego car의 위치가 원점이 되는 좌표이다.  
