@@ -19,7 +19,7 @@ toc_sticky: true
 use_math: true
  
 date: 2022-07-30
-last_modified_at: 2022-07-31
+last_modified_at: 2022-04-07
 ---
 
 논문 정보: Li, Z., Wang, W., Li, H., Xie, E., Sima, C., Lu, T., ... & Dai, J. (2022). BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers. arXiv preprint arXiv:2203.17270.  
@@ -88,8 +88,6 @@ Deformable attention은 Query가 모든 2D feature 영역이 아닌 임의의 �
 
 Deformable attention은 2D perception task에 맞게 설계 되었다 보니, 3D scenes에 적용하기 위해 약간의 수정을 했다. <br>
 
-수정된 부분이 아래와 같다. <br>
-
 <br>
 다시 spatial cross-attention 설명으로 넘어가자면,  
 
@@ -110,14 +108,48 @@ BEV place 상의 각 query들을 pillar-like query로 옮긴다.
 <center> <img src="../../assets/images/posts/3DOD/2022-07-30-BEVFormer/3DOD_bevformer_fig3.png" width="700" alt="{{ include.description }}">
   </center>  
 
-$ i $ 는 camera view의 index, $ j $ 는 reference points의 index, $ N_{ref} $ 는 각 BEV query에서의 total reference points 를 나타낸다.  
-$ F_{t}^{i} $ 는 i 번째 camera view의 features 를 나타낸다.  
+$ i $ 는 camera view의 index, $ j $ 는 reference points의 index, $ N_{ref} $ 는 각 BEV query에서의 total reference points 를, 
+$ F_{t}^{i} $ 는 i 번째 camera view의 features 를 나타낸다.  <br>
+<br>
 각 BEV Query $ Q_{p} $ 에 대해, i 번째 view 에 대한 j 번째 reference point 를 얻기 위해  project function $ P(p, i, j) $ 를 정의한다.  
 <br>
 이 project function 이 어떻게 동작하는 지 살펴보자.  
+<br>
 우선 grid-shaped query $ Q $ 상에서 $ p=(x, y) $ 위치한 query 한 칸(?)을 $ Q_{p} $ 라고 하면, 이 $ Q_{p} $ 위치에 해당하는 real world location 을 계산한다.  
 
-$$ x' = (x - \frac{W}{2}) * s; \quad y' = (y - \frac{H}{2}) * s $$
+$$ x' = (x - \frac{W}{2}) * s; \quad y' = (y - \frac{H}{2}) * s \quad \quad (3) $$
 
-이때, $H, W$ 는 BEV queries의 spatial shape 에 대한 값이고, $s$ 는 BEV's grid의 resolution size 가 된다.  
-또한, $ (x', y') $ 은 ego car의 위치가 원점이 되는 좌표이다.  
+이때, $H, W$ 는 BEV queries의 spatial shape 에 대한 값이고, $s$ 는 BEV's grid의 resolution size 가 된다.  <br>
+<br>
+또한, $ (x', y') $ 은 ego car의 위치가 원점일 때의 좌표이다.  
+
+본 논문에서 4.2 절 Experimental Settings 에 쓰여 있는 내용에 의하면, BEV Queries 의 크기는 200 * 200 이고, perception ranges 는 [- 51.2 m, 51.2 m] ,  BEV grid 의 resolution 크기 $s$ 는 0.512 m 라고 한다.  
+
+따라서 (1) 식은 ego car 위치를 원점이라고 두었을 때의 상대적인 좌표가 된다.  <br>
+
+실제 코드 상에서 역시 아래와 같이 reference points 를 정해줌을 알 수 있다.  <br>
+
+<center> <img src="../../assets/images/posts/3DOD/2022-07-30-BEVFormer/3DOD_bevformer_fig5.png" width="700" alt="{{ include.description }}">
+  </center>  
+<br>
+Reference points는 Deformable DETR 논문에 정의된 것 처럼, feature map 상에서의 query 위치 정도로 생각하면 될 것 같다.  
+
+어쨌든, 3D space 상에서 $(x', y')$ 에 위치한 object는 높이가 각기 다를 것이고, 이 object의 높이 정보는 z축 상의 $ z' $ 로 표현한다.  
+
+$ \lbrace z_{j}' \rbrace^{N_{ref}}_{j=1} $ predefine 해서 사용함으로써, 각기 다른 높이를 갖는 object 에 대한 정보를 찾을 수 있도록 한다.  
+
+따라서, 각 query $ Q_{p} $ 에 대해 pillar 형식의 3D reference points $ \left( x', y', z_{j}' \right)^{N_{ref}}_{j=1} $ 를 구할 수 있다.  
+
+이 3D reference points 들을 각 카메라의 projection matrix 에 따라 각기 다른 image views에 project를 한다.  
+
+이 연산을 수식으로 표현하면 다음과 같다.  
+
+$$ P(p, i, j) = (x_{ij}, y_{ij}) \quad where \; z_{ij} \cdot [x_{ij} \;  y_{ij} \; 1 ]^{T} \; = \; T_{i} \cdot [x' \; y' \; z_{j}' \; 1]^{T} .\quad \quad (4) $$ <br>
+
+위 수식에서 $ P(p, i, j) $ 은 i 번째 view의 2D point를 의미 한다.  <br>
+<br>
+수식을 뜯어 보면,  j 번째 reference 3D point $ (x', y', z_{j}') $ 와 i번째 카메라의 project matrix $ T_{i} \in \mathbb{R} ^{3 \times 4} $ 를 통해 $ x_{ij}, y_{ij} $ 를 찾아서 2D view 들 중 어디에 project를 할 지 정한다고 볼 수 있다.  
+
+#### 3.4 Temporal Self-Attention
+
+<br>
