@@ -31,8 +31,8 @@ last_modified_at: 2022-04-07
 
 <center> <img src="../../assets/images/posts/3DOD/2022-07-30-BEVFormer/3DOD_bevformer_fig1.JPG" width="700" alt="{{ include.description }}">
   </center> 
-
-BEVFormer의 key design은 다음과 같습니다. <br>
+<br>
+<u>BEVFormer의 key design은 다음과 같습니다.</u> <br>
 1) Grid-shaped BEV queries to fuse spatial and temporal features via attention mechanisms flexibly <br>
 2) Spatial cross-attention module to aggregate the spatial features from multi-camera images <br>
 3) Temporal self-attention module to extract temporal information from history BEV features, which benefits the velocity estimation of moving objects and the detection of heavily occluded objects. <br>
@@ -50,7 +50,7 @@ BEVFormer의 key design은 다음과 같습니다. <br>
 
 BEVFormer에 사용된 6개의 encoder layer는 기존 transoformer의 encoder와는 BEV query, spatial cross-attention, temporal self-attention의 3가지 design이 추가되었다는 점이 다릅니다.
 
-BEVFormer의 대략적인 파이프라인은,
+<u>BEVFormer의 대략적인 파이프라인은, </u>
 
 1. T 시점에서, multi-camera image를 ResNet-101+FPN(1/16, 1/32, 1/64)로 feed, 6개의 feature를 얻음. <br>
 2. 각 encoder에서, BEV queries로 t-1 시점의 BEV feature Bt-1으로부터 temporal self-attention으로 temporal information을 쿼리 <br>
@@ -58,7 +58,7 @@ BEVFormer의 대략적인 파이프라인은,
 4. 이 과정으로 refined BEV features를 만들고, 다음 encoder layer의 input으로 사용함. (encoder layer 수 : 6) <br>
 5. 모든 encoder layer를 통화하면, BEV feature Bt가 만들어 지고, 3D detection과 map segmentation heat로 3D Bbox와 semantic map을 predict. <br>
 
-<br>
+---
 
 #### 3.2 BEV Queries
 
@@ -76,7 +76,7 @@ BEV feature의 center는 ego car의 position 에 해당한다. <br>
 
 해당 논문에서는 BEV query Q에 learnable positional embedding을 추가하여 BEVFormer의 input 으로 사용한다. <br>
 
-<br>
+---
 
 #### 3.3 Spatial Cross-Attention
 
@@ -88,8 +88,7 @@ Deformable attention은 Query가 모든 2D feature 영역이 아닌 임의의 �
 
 Deformable attention은 2D perception task에 맞게 설계 되었다 보니, 3D scenes에 적용하기 위해 약간의 수정을 했다. <br>
 
-<br>
-다시 spatial cross-attention 설명으로 넘어가자면,  
+<u>다시 spatial cross-attention 설명으로 넘어가자면,</u>  
 
 BEV place 상의 각 query들을 pillar-like query로 옮긴다.  
 
@@ -150,6 +149,36 @@ $$ P(p, i, j) = (x_{ij}, y_{ij}) \quad where \; z_{ij} \cdot [x_{ij} \;  y_{ij} 
 <br>
 수식을 뜯어 보면,  j 번째 reference 3D point $ (x', y', z_{j}') $ 와 i번째 카메라의 project matrix $ T_{i} \in \mathbb{R} ^{3 \times 4} $ 를 통해 $ x_{ij}, y_{ij} $ 를 찾아서 2D view 들 중 어디에 project를 할 지 정한다고 볼 수 있다.  
 
+---
+
 #### 3.4 Temporal Self-Attention
 
 <br>
+본 논문의 저자는 moving object의 velocity를 추론하거나 static images에서 많이 가려진(highly occluded) object를 detection 할 때에 temporal information이 중요하다고 주장한다. 
+<br>
+
+따라서, history BEV feature를 사용하여 temporal information을 뽑기 위해 temporal self-attention 을 디자인 하였다. <br> 
+
+현재 시점의 BEV queries $ Q $ 와 $t-1$ 시점의 history BEV features $ B_{t-1} $ 가 있다고 하자. <br> <br>
+일단 $ B_{t-1} $ 을 $ Q $ 로 align 을 하는데, 이때 ego-motion 정보를 기반으로 align 한다. <br> <br>
+따라서 시점이 다른 BEV query에 대해 같은 위치의 grid를 real-world location 에 맞출 수 있다. <br> <br>
+align이 된 BEV feature $B_{t-1}$ 을 $B_{t-1}'$ 이라고 하자. <br> <br>
+이때 주의해야 할 점은 $t-1$ 에서 $t$ 로 시간이 지남에 따라, real world 상의 movable objects를 여러 방향으로 움직일 수 있다는 점이다. <br> <br>
+이러한 점때문에 다른 시점의 BEV features 간의 동일한 object들에 대해 정확한 assocation을 표현하는 것이 어렵다 <br> <br>
+따라서, 본 논문에서는 temporal self-attention (TSA) layer를 통해 feature 들 간의 temporal connection을 구축한다. <br> <br>
+TSA layer 을 수식으로 표현하면, <br> <br>
+
+<center> <img src="../../assets/images/posts/3DOD/2022-07-30-BEVFormer/3DOD_bevformer_fig6.png" width="700" alt="{{ include.description }}">
+  </center>  
+<br>
+
+여기서 $Q_{p}$ 는 마찬가지로 $ p=(x,y) $ 에 위치한 BEV query를 나타낸다. <br> <br>
+또한, vanilla deformable attention 과 달리 TSA 에서 offsets $ \delta p $ 는 $Q$ 와 $B_{t-1}'$을 concatenation 하여 예측을 한다. <br> <br>
+각 sequence 의 첫번째 sample 에 대해서는 previous BEV features 가 없으므로, 현재 시점의 BEV query 를 두 개로 복사하여 $ \lbrace Q, Q \rbrace $ 를 input으로 넣는다. <br> 
+
+BEV를 stacking 하여 사용하는 기존 논문들과 비교했을 때, BEVFormer의 temporal self-attention은 long temporal dependency 를 더욱 효율적으로 구축할 수 있다. <br> <br>
+BEVFormer는 BEV feature들을 여러번 stacking 하는 것보다 previous BEV features 로 부터 temporal information을 뽑으므로, computational cost도 더 적고, disturbing information 문제도 덜 발생한다. <br> <br>
+
+---
+
+#### 3.5 Applications of BEV Features
