@@ -182,3 +182,13 @@ BEVFormer는 BEV feature들을 여러번 stacking 하는 것보다 previous BEV 
 ---
 
 #### 3.5 Applications of BEV Features
+
+<br>
+BEV feature 는 2D feature map 이기 때문에 3D object detection 외에 map segmentation 에도 활용할 수 있다.  
+
+<br>
+
+##### 3D Object Detection
+
+따라서, BEVFormer 에서는 2D detector 인 DETR 기반으로 한 end-to-end 3D detection head 를 개발했다.  
+decoder에 single-scale BEV feature를 input으로 하며, 2D bounding boxes 를 예측하기 보다는 3D bounding box ㄱ
