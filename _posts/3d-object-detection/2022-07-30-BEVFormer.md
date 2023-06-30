@@ -191,4 +191,5 @@ BEV feature 는 2D feature map 이기 때문에 3D object detection 외에 map s
 ##### 3D Object Detection
 
 따라서, BEVFormer 에서는 2D detector 인 DETR 기반으로 한 end-to-end 3D detection head 를 개발했다.  
-decoder에 single-scale BEV feature를 input으로 하며, 2D bounding boxes 를 예측하기 보다는 3D bounding box ㄱ
+2D bounding boxes 가 아닌 3D bounding box 와 velocity 를 예측하는 decoder에 single-scale BEV feature를 input으로 하며, bounding box regression 에는 $ L_1 $ loss 를 사용한다.  
+transformer 기반의 detection head를 사용함으로써 NMS post-processing 없이도 3D bounding box와 velocity 를 예측할 수 있다.  
