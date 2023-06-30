@@ -19,7 +19,7 @@ toc_sticky: true
 use_math: true
  
 date: 2022-07-30
-last_modified_at: 2022-04-07
+last_modified_at: 2023-04-07
 ---
 
 논문 정보: Li, Z., Wang, W., Li, H., Xie, E., Sima, C., Lu, T., ... & Dai, J. (2022). BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers. arXiv preprint arXiv:2203.17270.  
